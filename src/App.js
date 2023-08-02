@@ -1,17 +1,24 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Tabla from './components/Tabla'
-import Formulario from './components/Formulario'
-import Eliminar from "./components/Eliminar";
-import Buscar from "./components/Buscar";
-import Crud from "./components/Crud";
+import Inicio from "./pages/inicio/Inicio";
+import Nosotros from "./pages/nosotros/Nosotros"
+import Servicio from "./pages/servicio/Servicio"
+import Contacto from "./pages/contacto/Contacto"
+import Ingresar from "./pages/formulario/Ingresar"
+import Menu from "./components/dashboard/Dashboard";
+import "./index.css";
 
 function App() {
   return (
     <Router>
     <div className="App">
       <Routes>
-        <Route path="/" element={<Crud/>} />
+        <Route path="/" element={<Inicio />} />
+        <Route path="/nosotros" element={<Nosotros />} />
+        <Route path="/servicios" element={<Servicio />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/ingresar" element={<Ingresar />} />
+        <Route path="/menu" element={<Menu />} />
       </Routes>
     </div>
   </Router>
