@@ -7,7 +7,6 @@ const BuscarMascota = () => {
 
   const handleSearch = (event) => {
     const searchTerm = event.target.value;
-    
     console.log('Buscando:', searchTerm);
     setSearchTerm(searchTerm);
   };
@@ -27,24 +26,6 @@ const BuscarMascota = () => {
               <SearchIcon />
             </InputAdornment>
           ),
-        }}
-        InputLabelProps={{
-          style: {
-            color: '#010E2E', 
-          },
-        }}
-        focused
-        style={{
-          borderColor: '#010E2E', 
-          '&:hover': {
-            borderColor: '#010E2E', 
-          },
-          '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#010E2E', 
-          },
-          '& .MuiOutlinedInput-root.Mui-focused': {
-            backgroundColor: '#010E2E', 
-          },
         }}
       />
     </div>

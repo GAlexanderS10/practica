@@ -3,6 +3,7 @@ import '../../styles/Sidebar.css'
 import { NavLink, useNavigate, } from "react-router-dom";
 import Logo from '../../assets/logoprincipal.png'
 import Topbar from '../dashboard/TopBar'
+import Contenido from '../dashboard/Contenido'
 
 const Sidebar = () => {
 
@@ -55,6 +56,7 @@ const Sidebar = () => {
           <div className="image-text">
             <span className="image">
             <NavLink
+                  
                   onClick={() => handleOptionClick("inicio")}
                   className={activeOption === "inicio" ? "active" : ""}
                 >
@@ -73,7 +75,7 @@ const Sidebar = () => {
             <ul className="menu-links">
               <li className="nav-link">
               <NavLink
-                  to=""
+                  
                   onClick={() => handleOptionClick("servicio")}
                   className={activeOption === "servicio" ? "active" : ""}
                 >
@@ -83,7 +85,8 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="nav-link">
-              <NavLink
+              <NavLink 
+                  
                   onClick={() => handleOptionClick("cliente")}
                   className={activeOption === "cliente" ? "active" : ""}
                 >
@@ -93,6 +96,7 @@ const Sidebar = () => {
               </li>
               <li className="nav-link">
               <NavLink
+                  
                   onClick={() => handleOptionClick("mascota")}
                   className={activeOption === "mascota" ? "active" : ""}
                 >
@@ -162,9 +166,7 @@ const Sidebar = () => {
 
       <section className="dashboard">
         <Topbar />
-        <div className="dash-content">
-          
-        </div>
+        <Contenido activeOption={activeOption} />
       </section>
     </>
   );
