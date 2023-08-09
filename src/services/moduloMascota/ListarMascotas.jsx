@@ -59,7 +59,7 @@ const StyledIconButton = styled(IconButton)({
 
 const ListarMascotas = () => {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  const [rowsPerPage, setRowsPerPage] = React.useState(2);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

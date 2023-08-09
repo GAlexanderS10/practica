@@ -11,10 +11,14 @@ import TablePagination from '@mui/material/TablePagination';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import AddCircleIcon from '@mui/icons-material/NoteAdd';
+import PetsIcon from '@mui/icons-material/Pets';
+import CitaIcon from '@mui/icons-material/CalendarMonth';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import EditarCliente from './EditarCliente';
+import EliminarCliente from './EliminarCliente'
+import MascotasModal from './MascotasModal';
+import CitasModal from './CitasModal'
 
 const columns = [
   { id: 'clienteId', label: 'ID', minWidth: 10 },
@@ -33,9 +37,15 @@ const StyledTableCellHeader = styled(TableCell)(({ theme }) => ({
   fontWeight: 'bold'
 }));
 
-const ListarClientes = ({ clientes }) => {
+const ListarClientes = ({ clientes, onClienteActualizado, onClienteEliminado }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
+  const [clienteSeleccionadoEliminar, setClienteSeleccionadoEliminar] = useState(null);
+  const [clienteXmascotaSeleccionado, setClientexMascotaSeleccionado] = useState(null);
+  const [mascotasModalOpen, setMascotasModalOpen] = useState(false);
+  const [citasxClienteSeleccionado, setCitasxClienteSeleccionado] = useState(null);
+  const [citasModalOpen, setCitasModalOpen] = useState(false);
 
   useEffect(() => {
     fetchClientes();
@@ -60,7 +70,48 @@ const ListarClientes = ({ clientes }) => {
     setPage(0);
   };
 
+  const handleOpenEditarCliente = (cliente) => {
+    setClienteSeleccionado(cliente);
+  };
+
+  const handleCloseEditarCliente = () => {
+    setClienteSeleccionado(null);
+  };
+
+  const handleClienteActualizado = (clienteId, datosActualizados) => {
+    onClienteActualizado(clienteId, datosActualizados);
+  };
+
+
+  const handleOpenEliminarCliente = (cliente) => {
+    setClienteSeleccionadoEliminar(cliente);
+  };
+  
+  const handleCloseEliminarCliente = () => {
+    setClienteSeleccionadoEliminar(null);
+  };
+  
+
+
+  const handleEliminarCliente = (clienteId) => {
+    onClienteEliminado(clienteId);
+  };
+
+
+  const handleOpenMascotasModal = (cliente) => {
+    console.log('clienteId en handleOpenMascotasModal:', cliente.clienteId);
+    setClientexMascotaSeleccionado(cliente);
+    setMascotasModalOpen(true);
+  };
+  
+  const handleOpenCitasModal = (cliente) => {
+    setCitasxClienteSeleccionado(cliente);
+    setCitasModalOpen(true);
+  };
+
+
   return (
+    <>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -90,22 +141,22 @@ const ListarClientes = ({ clientes }) => {
                   <TableCell align="center">{cliente.email}</TableCell>
                   <TableCell align="center">
                     <Box bgcolor="#F3F3F3" padding={1} borderRadius="50%" display="inline-block" margin="0 3px">
-                      <IconButton>
-                        <VisibilityIcon style={{ color: '#555555' }} />
+                    <IconButton onClick={() => handleOpenMascotasModal(cliente)}>
+                        <PetsIcon style={{ color: '#555555' }} />
                       </IconButton>
                     </Box>
                     <Box bgcolor="#BBF7BC" padding={1} borderRadius="50%" display="inline-block" margin="0 3px">
-                      <IconButton>
-                        <AddCircleIcon style={{ color: '#048E11' }} />
+                      <IconButton onClick={() => handleOpenCitasModal(cliente)}>
+                        <CitaIcon style={{ color: '#048E11' }} />
                       </IconButton>
                     </Box>
                     <Box bgcolor="#A6D4FA" padding={1} borderRadius="50%" display="inline-block" margin="0 3px">
-                      <IconButton>
+                      <IconButton onClick={() => handleOpenEditarCliente(cliente)}>
                         <EditIcon style={{ color: '#1565C0' }} />
                       </IconButton>
                     </Box>
                     <Box bgcolor="#FEB2B2" padding={1} borderRadius="50%" display="inline-block" margin="0 3px">
-                      <IconButton>
+                      <IconButton onClick={() => handleOpenEliminarCliente(cliente)}>
                         <DeleteIcon style={{ color: '#B91C1C' }} />
                       </IconButton>
                     </Box>
@@ -125,6 +176,40 @@ const ListarClientes = ({ clientes }) => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+
+    {clienteSeleccionado && (
+        <EditarCliente
+          cliente={clienteSeleccionado}
+          onClose={handleCloseEditarCliente}
+          onClienteActualizado={handleClienteActualizado}
+        />
+      )}
+
+
+{clienteSeleccionadoEliminar && (
+  <EliminarCliente
+  clienteId={clienteSeleccionadoEliminar.clienteId}
+  clienteNombre={clienteSeleccionadoEliminar.nombres}
+  onModalClose={handleCloseEliminarCliente}
+  onClienteEliminado={handleEliminarCliente}
+/>
+)}
+
+<MascotasModal
+  openModal={mascotasModalOpen}
+  onCloseMascota={() => setMascotasModalOpen(false)}
+  clienteId={clienteXmascotaSeleccionado?.clienteId}
+  clienteNombre={clienteXmascotaSeleccionado?.nombres}
+/>
+
+   <CitasModal
+        openModalCita={citasModalOpen}
+        onCloseCita={() => setCitasModalOpen(false)}
+        clienteId={citasxClienteSeleccionado?.clienteId}
+        clienteNombre={citasxClienteSeleccionado?.nombres}
+      />
+
+    </>
   );
 };
 

@@ -250,6 +250,7 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
                   variant="outlined"
                   type="number"
                   value={dni}
+                  inputProps={{ maxLength: 8 }}
                   onChange={(e) => setDni(e.target.value)}
                   onBlur={validateDni}
                   error={!!dniError}
@@ -263,6 +264,7 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
                   variant="outlined"
                   type="number"
                   value={celular}
+                  inputProps={{ maxLength: 9 }}
                   onChange={(e) => setCelular(e.target.value)}
                   onBlur={validateCelular}
                   error={!!celularError}

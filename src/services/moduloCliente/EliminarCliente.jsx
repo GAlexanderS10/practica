@@ -1,69 +1,78 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  IconButton,
-} from '@mui/material';
-import { Close } from '@mui/icons-material';
+import React from 'react';
+import axios from 'axios';
+import { Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, Button, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-const EliminarMascota = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setModalOpen(true);
+const EliminarCliente = ({ clienteId, clienteNombre, onModalClose, onClienteEliminado }) => {
+  const handleClose = () => {
+    onModalClose();
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
-  const handleDelete = () => {
-    //logica eliminar
-    console.log('Elemento eliminado');
-    setModalOpen(false);
+  const handleEliminarCliente = async () => {
+    try {
+      const response = await axios.delete(`https://localhost:7266/api/Cliente/${clienteId}`);
+      if (response.status === 204) {
+        console.log('Cliente eliminado exitosamente.');
+        onClienteEliminado(clienteId);
+        onModalClose();
+      } else {
+        console.error('Error al eliminar el cliente.');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
   };
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={handleOpenModal}>
-        Eliminar Cliente
-      </Button>
-      <Dialog open={modalOpen} onClose={handleCloseModal}>
-      <DialogTitle   sx={{display: 'flex', alignItems: 'center',justifyContent: 'space-between',backgroundColor: '#B2211E', color: '#fff', padding: '20px',fontWeight: 'bold'}}> 
-          CONFIRMACIÓN DE ELIMINACIÓN
+    <Dialog open onClose={handleClose}>
+      <DialogTitle
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  backgroundColor: '#B2211E',
+                  color: '#fff',
+                  padding: '20px',
+                  fontWeight: 'bold',
+                }}
+              >
+                CONFIRMACIÓN DE ELIMINACIÓN 
         <IconButton
-            aria-label="close"
-            onClick={() => {
-              handleCloseModal();
-            }}
-            sx={{ position: 'absolute', right: 8, top: 8, color: '#fff',bgcolor:"#C84337", '&:hover': {
-              bgcolor: '#F87171', color: '#fff'
-            },}}
-          >
-            <Close />
-          </IconButton>
-        </DialogTitle>
-        <br/>
-        <DialogContent>
-          <DialogContentText sx={{  fontWeight:'bold', color:'#222'}}>
-            ¿Estás seguro de que deseas eliminar este cliente?
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: '#fff',
+            bgcolor: '#C84337',
+            '&:hover': {
+              bgcolor: '#F87171',
+              color: '#fff',
+            },
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+      <br />
+      <DialogContent>
+        <DialogContentText sx={{ fontWeight: 'bold', color: '#222' }}>
+        ¿Estás seguro de que deseas eliminar al cliente <strong>"{clienteNombre}"</strong>?
           </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-        <Button onClick={handleCloseModal} sx={{  color:'#fff', backgroundColor: '#8D8D8D','&:hover': { backgroundColor: '#747674',}}}>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}  sx={{ color: '#fff', backgroundColor: '#8D8D8D', '&:hover': { backgroundColor: '#747674' } }}
+          >
             CANCELAR
           </Button>
-          <Button onClick={handleDelete} sx={{  color:'#fff', backgroundColor: '#C84337','&:hover': { backgroundColor: '#F87171',}}}>
-              ELIMINAR
+        <Button onClick={handleEliminarCliente} variant="contained" sx={{ color: '#fff', backgroundColor: '#C84337', '&:hover': { backgroundColor: '#F87171' } }}
+          >
+            ELIMINAR
           </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+      </DialogActions>
+    </Dialog>
   );
 };
 
-export default EliminarMascota;
+export default EliminarCliente;
