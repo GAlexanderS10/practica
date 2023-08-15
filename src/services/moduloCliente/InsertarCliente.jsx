@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import {
   TextField,
   Button,
@@ -12,73 +12,71 @@ import {
   DialogActions,
   IconButton,
   Typography,
-} from '@mui/material';
-import { Add, Close } from '@mui/icons-material';
+} from "@mui/material";
+import { Add, Close } from "@mui/icons-material";
 
-const InsertarCliente = ({ onClienteRegistrado })  => {
-  const [nombre, setNombre] = useState('');
-  const [nombreError, setNombreError] = useState('');
-  const [apellido, setApellido] = useState('');
-  const [apellidoError, setApellidoError] = useState('');
-  const [dni, setDni] = useState('');
-  const [dniError, setDniError] = useState('');
-  const [celular, setCelular] = useState('');
-  const [celularError, setCelularError] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+const InsertarCliente = ({ onClienteRegistrado }) => {
+  const [nombre, setNombre] = useState("");
+  const [nombreError, setNombreError] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [apellidoError, setApellidoError] = useState("");
+  const [dni, setDni] = useState("");
+  const [dniError, setDniError] = useState("");
+  const [celular, setCelular] = useState("");
+  const [celularError, setCelularError] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [open, setOpen] = useState(false);
 
   const isNumber = (text) => /^\d+$/.test(text);
 
   const validateNombre = () => {
     if (!nombre.trim().length) {
-      setNombreError('Debe completar este campo');
+      setNombreError("Debe completar este campo");
     } else {
-      setNombreError('');
+      setNombreError("");
     }
   };
 
   const validateApellido = () => {
     if (!apellido.trim().length) {
-      setApellidoError('Debe completar este campo');
+      setApellidoError("Debe completar este campo");
     } else {
-      setApellidoError('');
+      setApellidoError("");
     }
   };
 
   const validateDni = () => {
     if (!dni.trim()) {
-      setDniError('Debe completar este campo');
+      setDniError("Debe completar este campo");
     } else if (!/^\d{8}$/.test(dni)) {
-      setDniError('El DNI debe tener exactamente 8 números');
+      setDniError("El DNI debe tener exactamente 8 números");
     } else if (!isNumber(dni)) {
-      setDniError('El DNI solo debe contener números');
+      setDniError("El DNI solo debe contener números");
     } else {
-      setDniError('');
+      setDniError("");
     }
   };
 
   const validateCelular = () => {
     if (!celular.trim()) {
-      setCelularError('Debe completar este campo');
+      setCelularError("Debe completar este campo");
     } else if (!/^\d{9}$/.test(celular)) {
-      setCelularError('El Celular debe tener exactamente 9 números');
+      setCelularError("El Celular debe tener exactamente 9 números");
     } else if (!isNumber(celular)) {
-      setCelularError('El Celular solo debe contener números');
+      setCelularError("El Celular solo debe contener números");
     } else {
-      setCelularError('');
+      setCelularError("");
     }
   };
 
   const validateEmail = () => {
     if (!email.trim()) {
-      setEmailError('Debe completar este campo');
-    } else if (
-      !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)
-    ) {
-      setEmailError('El correo electrónico no es válido');
+      setEmailError("Debe completar este campo");
+    } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+      setEmailError("El correo electrónico no es válido");
     } else {
-      setEmailError('');
+      setEmailError("");
     }
   };
 
@@ -112,12 +110,12 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
 
         // Reemplaza 'https://tu-api-rest.com/api/clientes' con la URL correcta de tu API REST para crear un nuevo cliente
         const response = await axios.post(
-          'https://localhost:7266/api/Cliente',
+          "https://localhost:7266/api/Cliente",
           clienteData
         );
 
         // Si la respuesta es exitosa, puedes hacer algo con la data de la respuesta
-        console.log('Formulario enviado:', response.data);
+        console.log("Formulario enviado:", response.data);
 
         // Llama a la función onClienteRegistrado con el nuevo cliente
         onClienteRegistrado(response.data);
@@ -125,11 +123,11 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
         // Cerrar el diálogo modal después de enviar el formulario
         handleCloseModal();
       } catch (error) {
-        console.error('Error al enviar el formulario:', error);
+        console.error("Error al enviar el formulario:", error);
       }
     } else {
       console.log(
-        'Hay errores en el formulario. Por favor, completa todos los campos correctamente.'
+        "Hay errores en el formulario. Por favor, completa todos los campos correctamente."
       );
     }
   };
@@ -143,16 +141,16 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
   };
 
   const handleReset = () => {
-    setNombre('');
-    setNombreError('');
-    setApellido('');
-    setApellidoError('');
-    setDni('');
-    setDniError('');
-    setCelular('');
-    setCelularError('');
-    setEmail('');
-    setEmailError('');
+    setNombre("");
+    setNombreError("");
+    setApellido("");
+    setApellidoError("");
+    setDni("");
+    setDniError("");
+    setCelular("");
+    setCelularError("");
+    setEmail("");
+    setEmailError("");
   };
 
   return (
@@ -162,33 +160,33 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
         color="primary"
         onClick={handleOpenModal}
         sx={{
-          background: '#fff',
-          color: '#29524A',
-          display: 'flex',
-          alignItems: 'center',
-          borderWidth: '2px',
-          borderStyle: 'solid',
-          justifyContent: 'center',
-          gap: '8px',
-          '&:hover': { background: '#DADDDA', color: '#184D47' },
+          background: "#fff",
+          color: "#29524A",
+          display: "flex",
+          alignItems: "center",
+          borderWidth: "2px",
+          borderStyle: "solid",
+          justifyContent: "center",
+          gap: "8px",
+          "&:hover": { background: "#DADDDA", color: "#184D47" },
         }}
       >
-        <Box sx={{ color: '#29524A' }}>
+        <Box sx={{ color: "#29524A" }}>
           <Add />
         </Box>
-        <Typography sx={{ fontWeight: 'bold' }}>AGREGAR</Typography>
+        <Typography sx={{ fontWeight: "bold" }}>AGREGAR</Typography>
       </Button>
 
       <Dialog open={open} onClose={handleCloseModal} fullWidth>
         <DialogTitle
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: '#8D8D8D',
-            color: '#fff',
-            padding: '20px',
-            fontWeight: 'bold',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            backgroundColor: "#8D8D8D",
+            color: "#fff",
+            padding: "20px",
+            fontWeight: "bold",
           }}
         >
           Registro de Cliente
@@ -199,24 +197,29 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
               handleReset();
             }}
             sx={{
-              position: 'absolute',
+              position: "absolute",
               right: 8,
               top: 8,
-              color: '#fff',
-              bgcolor: '#C84337',
-              '&:hover': {
-                bgcolor: '#F87171',
-                color: '#fff',
+              color: "#fff",
+              bgcolor: "#C84337",
+              "&:hover": {
+                bgcolor: "#F87171",
+                color: "#fff",
               },
             }}
           >
             <Close />
           </IconButton>
         </DialogTitle>
-        <br />
         <DialogContent>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                marginTop: "5px",
+              }}
+            >
               <Grid item xs={6}>
                 <TextField
                   fullWidth
@@ -271,7 +274,7 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
                   helperText={celularError}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   label="Email"
@@ -292,9 +295,9 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
             onClick={handleReset}
             sx={{
               marginTop: 4,
-              color: '#fff',
-              backgroundColor: '#8D8D8D',
-              '&:hover': { backgroundColor: '#747674' },
+              color: "#fff",
+              backgroundColor: "#8D8D8D",
+              "&:hover": { backgroundColor: "#747674" },
             }}
           >
             RESETEAR
@@ -305,8 +308,8 @@ const InsertarCliente = ({ onClienteRegistrado })  => {
             variant="contained"
             sx={{
               marginTop: 4,
-              backgroundColor: '#29524A',
-              '&:hover': { backgroundColor: '#1D3B35' },
+              backgroundColor: "#29524A",
+              "&:hover": { backgroundColor: "#1D3B35" },
             }}
           >
             REGISTRAR

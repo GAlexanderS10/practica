@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Button, Box, Container, Dialog, DialogTitle, DialogContent, DialogActions, Grid, TextField, IconButton } from '@mui/material';
-import { Close, PhotoCamera } from '@mui/icons-material';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Button,
+  Box,
+  Container,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Grid,
+  TextField,
+  IconButton,
+} from "@mui/material";
+import { Close, PhotoCamera } from "@mui/icons-material";
 
 const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
-  const [nombre, setNombre] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [precio, setPrecio] = useState('');
+  const [nombre, setNombre] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [precio, setPrecio] = useState("");
   const [imagen, setImagen] = useState(null);
-  const [imagenPreview, setImagenPreview] = useState('');
+  const [imagenPreview, setImagenPreview] = useState("");
 
   useEffect(() => {
     // Cuando se monte el componente, establecer los valores actuales del servicio en los campos del formulario
@@ -26,26 +37,35 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
   const handleGuardarCambios = async () => {
     try {
       const formDataWithFile = new FormData();
-      formDataWithFile.append('Nombre', nombre);
-      formDataWithFile.append('Descripcion', descripcion);
-      formDataWithFile.append('Precio', precio);
-      formDataWithFile.append('Imagen', imagen);
+      formDataWithFile.append("Nombre", nombre);
+      formDataWithFile.append("Descripcion", descripcion);
+      formDataWithFile.append("Precio", precio);
+      formDataWithFile.append("Imagen", imagen);
 
-      const response = await axios.put(`https://localhost:7266/api/Servicio/${servicio.servicioId}`, formDataWithFile, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.put(
+        `https://localhost:7266/api/Servicio/${servicio.servicioId}`,
+        formDataWithFile,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       if (response.status === 204) {
-        console.log('Servicio actualizado exitosamente.');
-        onServicioActualizado(servicio.servicioId, { nombre, descripcion, precio, imagen: servicio.imagen });
+        console.log("Servicio actualizado exitosamente.");
+        onServicioActualizado(servicio.servicioId, {
+          nombre,
+          descripcion,
+          precio,
+          imagen: servicio.imagen,
+        });
         onClose();
       } else {
-        console.error('Error al actualizar el servicio.');
+        console.error("Error al actualizar el servicio.");
       }
     } catch (error) {
-      console.error('Error en la solicitud:', error);
+      console.error("Error en la solicitud:", error);
     }
   };
 
@@ -62,13 +82,13 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
       <Dialog open onClose={handleClose} fullWidth>
         <DialogTitle
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: '#8D8D8D',
-            color: '#fff',
-            padding: '20px',
-            fontWeight: 'bold',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            backgroundColor: "#8D8D8D",
+            color: "#fff",
+            padding: "20px",
+            fontWeight: "bold",
           }}
         >
           Editar Servicio
@@ -76,24 +96,29 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
             aria-label="close"
             onClick={handleClose}
             sx={{
-              position: 'absolute',
+              position: "absolute",
               right: 8,
               top: 8,
-              color: '#fff',
-              bgcolor: '#C84337',
-              '&:hover': {
-                bgcolor: '#F87171',
-                color: '#fff',
+              color: "#fff",
+              bgcolor: "#C84337",
+              "&:hover": {
+                bgcolor: "#F87171",
+                color: "#fff",
               },
             }}
           >
             <Close />
           </IconButton>
         </DialogTitle>
-        <br />
         <DialogContent>
           <form>
-            <Grid container spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                marginTop: "5px",
+              }}
+            >
               <Grid item xs={6}>
                 <TextField
                   fullWidth
@@ -125,12 +150,12 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
                   value={precio}
                   onChange={(e) => {
                     // Utilizamos una expresión regular para permitir solo números y puntos en el valor
-                    const value = e.target.value.replace(/[^0-9,]/g, '');
+                    const value = e.target.value.replace(/[^0-9,]/g, "");
                     setPrecio(value);
                   }}
                   inputProps={{
-                    inputMode: 'numeric',
-                    pattern: '[0-9]*',
+                    inputMode: "numeric",
+                    pattern: "[0-9]*",
                   }}
                 />
               </Grid>
@@ -141,7 +166,7 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
                     accept="image/*"
                     id="icon-button-file-edit"
                     type="file"
-                    style={{ display: 'none' }}
+                    style={{ display: "none" }}
                     onChange={handleImagenChange}
                   />
                   <label htmlFor="icon-button-file-edit">
@@ -150,7 +175,7 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
                       component="span"
                       startIcon={<PhotoCamera />}
                       fullWidth
-                      sx={{ backgroundColor: '#8D8D8D' }}
+                      sx={{ backgroundColor: "#8D8D8D" }}
                     >
                       Elegir Foto
                     </Button>
@@ -160,9 +185,9 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
                       src={imagenPreview}
                       alt="Previsualización"
                       style={{
-                        width: '70px',
-                        height: 'auto',
-                        marginLeft: '5px',
+                        width: "70px",
+                        height: "auto",
+                        marginLeft: "5px",
                       }}
                     />
                   )}
@@ -176,9 +201,9 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
             onClick={handleClose}
             sx={{
               marginTop: 4,
-              color: '#fff',
-              backgroundColor: '#8D8D8D',
-              '&:hover': { backgroundColor: '#747674' },
+              color: "#fff",
+              backgroundColor: "#B91C1C",
+              "&:hover": { backgroundColor: "#FA3E35" },
             }}
           >
             CANCELAR
@@ -188,11 +213,11 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
             variant="contained"
             sx={{
               marginTop: 4,
-              backgroundColor: '#29524A',
-              '&:hover': { backgroundColor: '#1D3B35' },
+              backgroundColor: "#01235e",
+              "&:hover": { backgroundColor: "#033180" },
             }}
           >
-            GUARDAR CAMBIOS
+            EDITAR
           </Button>
         </DialogActions>
       </Dialog>

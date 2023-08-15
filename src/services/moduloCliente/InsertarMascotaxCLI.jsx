@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import {
   FormControl,
   FormControlLabel,
@@ -20,32 +20,32 @@ import {
   DialogActions,
   IconButton,
   Typography,
-} from '@mui/material';
-import { PhotoCamera, Close, Add } from '@mui/icons-material';
-import MachoIcon from '@mui/icons-material/Male';
-import HembraIcon from '@mui/icons-material/Female';
+} from "@mui/material";
+import { PhotoCamera, Close, Add } from "@mui/icons-material";
+import MachoIcon from "@mui/icons-material/Male";
+import HembraIcon from "@mui/icons-material/Female";
 
-const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
-  const [successMessage, setSuccessMessage] = useState('');
+const InsertarMascotaxCLI = ({ clienteId, onMascotasUpdated }) => {
+  const [successMessage, setSuccessMessage] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    Nombre: '',
-    TipoMascota: '',
-    Raza: '',
-    Sexo: 'Macho',
-    Color: '',
+    Nombre: "",
+    TipoMascota: "",
+    Raza: "",
+    Sexo: "Macho",
+    Color: "",
     FechaNacimiento: new Date().toISOString().slice(0, 10),
     Foto: null,
     ClienteId: clienteId,
   });
 
-  const [nombreError, setNombreError] = useState('');
-  const [tipoMascotaError, setTipoMascotaError] = useState('');
-  const [razaError, setRazaError] = useState('');
-  const [sexoError, setSexoError] = useState('');
-  const [colorError, setColorError] = useState('');
-  const [fechaNacimientoError, setFechaNacimientoError] = useState('');
-  const [fotoError, setFotoError] = useState('');
+  const [nombreError, setNombreError] = useState("");
+  const [tipoMascotaError, setTipoMascotaError] = useState("");
+  const [razaError, setRazaError] = useState("");
+  const [sexoError, setSexoError] = useState("");
+  const [colorError, setColorError] = useState("");
+  const [fechaNacimientoError, setFechaNacimientoError] = useState("");
+  const [fotoError, setFotoError] = useState("");
 
   const openModal = () => {
     setModalOpen(true);
@@ -70,63 +70,63 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
 
   const validateNombre = () => {
     if (!formData.Nombre.trim()) {
-      setNombreError('Debe completar este campo');
+      setNombreError("Debe completar este campo");
     } else if (!isAlpha(formData.Nombre)) {
-      setNombreError('El nombre solo debe contener letras');
+      setNombreError("El nombre solo debe contener letras");
     } else {
-      setNombreError('');
+      setNombreError("");
     }
   };
 
   const validateTipoMascota = () => {
     if (!formData.TipoMascota.trim()) {
-      setTipoMascotaError('Debe seleccionar una especie');
+      setTipoMascotaError("Debe seleccionar una especie");
     } else {
-      setTipoMascotaError('');
+      setTipoMascotaError("");
     }
   };
 
   const validateRaza = () => {
     if (!formData.Raza.trim()) {
-      setRazaError('Debe completar este campo');
+      setRazaError("Debe completar este campo");
     } else if (!isAlpha(formData.Raza)) {
-      setRazaError('La raza solo debe contener letras');
+      setRazaError("La raza solo debe contener letras");
     } else {
-      setRazaError('');
+      setRazaError("");
     }
   };
 
   const validateSexo = () => {
     if (!formData.Sexo) {
-      setSexoError('Debe seleccionar un sexo');
+      setSexoError("Debe seleccionar un sexo");
     } else {
-      setSexoError('');
+      setSexoError("");
     }
   };
 
   const validateColor = () => {
     if (!formData.Color.trim()) {
-      setColorError('Debe completar este campo');
+      setColorError("Debe completar este campo");
     } else if (!isAlpha(formData.Color)) {
-      setColorError('El color solo debe contener letras');
+      setColorError("El color solo debe contener letras");
     } else {
-      setColorError('');
+      setColorError("");
     }
   };
 
   const validateFechaNacimiento = () => {
     if (!formData.FechaNacimiento) {
-      setFechaNacimientoError('Debe seleccionar una fecha');
+      setFechaNacimientoError("Debe seleccionar una fecha");
     } else {
-      setFechaNacimientoError('');
+      setFechaNacimientoError("");
     }
   };
 
   const validateFoto = () => {
     if (!formData.Foto) {
-      setFotoError('Debe elegir una foto');
+      setFotoError("Debe elegir una foto");
     } else {
-      setFotoError('');
+      setFotoError("");
     }
   };
 
@@ -154,53 +154,59 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
         for (const key in formData) {
           formDataWithFile.append(key, formData[key]);
         }
-        
-        const response = await axios.post('https://localhost:7266/api/Mascota', formDataWithFile, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+
+        const response = await axios.post(
+          "https://localhost:7266/api/Mascota",
+          formDataWithFile,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
 
         if (response.status === 201) {
-          setSuccessMessage('Mascota agregada correctamente.');
+          setSuccessMessage("Mascota agregada correctamente.");
 
-        // Call the onMascotasUpdated function to trigger list update
-        
-        closeModal();
-        setTimeout(() => {
-          setSuccessMessage('');
-          
-          onMascotasUpdated();
-        }, 1000);
+          // Call the onMascotasUpdated function to trigger list update
+
+          closeModal();
+          setTimeout(() => {
+            setSuccessMessage("");
+
+            onMascotasUpdated();
+          }, 1000);
         } else {
-          console.error('Error al registrar la mascota.');
+          console.error("Error al registrar la mascota.");
         }
       } catch (error) {
-        console.error('Error en la solicitud:', error);
+        console.error("Error en la solicitud:", error);
       }
     } else {
-      console.log('Hay errores en el formulario. Por favor, completa todos los campos correctamente.');
+      console.log(
+        "Hay errores en el formulario. Por favor, completa todos los campos correctamente."
+      );
     }
   };
 
   const handleReset = () => {
     setFormData({
-      Nombre: '',
-      TipoMascota: '',
-      Raza: '',
-      Sexo: 'Macho',
-      Color: '',
+      Nombre: "",
+      TipoMascota: "",
+      Raza: "",
+      Sexo: "Macho",
+      Color: "",
       FechaNacimiento: new Date().toISOString().slice(0, 10),
       Foto: null,
       ClienteId: clienteId,
     });
-    setNombreError('');
-    setTipoMascotaError('');
-    setRazaError('');
-    setSexoError('');
-    setColorError('');
-    setFechaNacimientoError('');
-    setFotoError('');
+    setNombreError("");
+    setTipoMascotaError("");
+    setRazaError("");
+    setSexoError("");
+    setColorError("");
+    setFechaNacimientoError("");
+    setFotoError("");
   };
 
   return (
@@ -210,33 +216,33 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
         color="primary"
         onClick={openModal}
         sx={{
-          background: '#fff',
-          color: '#29524A',
-          display: 'flex',
-          alignItems: 'center',
-          borderWidth: '2px',
-          borderStyle: 'solid',
-          justifyContent: 'center',
-          gap: '8px',
-          '&:hover': { background: '#DADDDA', color: '#184D47' },
+          background: "#fff",
+          color: "#29524A",
+          display: "flex",
+          alignItems: "center",
+          borderWidth: "2px",
+          borderStyle: "solid",
+          justifyContent: "center",
+          gap: "8px",
+          "&:hover": { background: "#DADDDA", color: "#184D47" },
         }}
       >
-        <Box sx={{ color: '#29524A' }}>
+        <Box sx={{ color: "#29524A" }}>
           <Add />
         </Box>
-        <Typography sx={{ fontWeight: 'bold' }}>AGREGAR</Typography>
+        <Typography sx={{ fontWeight: "bold" }}>AGREGAR</Typography>
       </Button>
 
       <Dialog open={modalOpen} onClose={closeModal} fullWidth>
         <DialogTitle
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            backgroundColor: '#8D8D8D',
-            color: '#fff',
-            padding: '20px',
-            fontWeight: 'bold',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            backgroundColor: "#8D8D8D",
+            color: "#fff",
+            padding: "20px",
+            fontWeight: "bold",
           }}
         >
           Registro de Mascota
@@ -244,24 +250,29 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
             aria-label="close"
             onClick={closeModal}
             sx={{
-              position: 'absolute',
+              position: "absolute",
               right: 8,
               top: 8,
-              color: '#fff',
-              bgcolor: '#C84337',
-              '&:hover': {
-                bgcolor: '#F87171',
-                color: '#fff',
+              color: "#fff",
+              bgcolor: "#C84337",
+              "&:hover": {
+                bgcolor: "#F87171",
+                color: "#fff",
               },
             }}
           >
             <Close />
           </IconButton>
         </DialogTitle>
-        <br />
         <DialogContent>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                marginTop: "5px",
+              }}
+            >
               <Grid item xs={6}>
                 <TextField
                   fullWidth
@@ -292,11 +303,11 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
                   {tipoMascotaError && (
                     <div
                       style={{
-                        color: '#C84337',
-                        fontFamily: 'arial',
-                        fontSize: '12.2px',
-                        fontWeight: 'inherit',
-                        margin: '4px 15px',
+                        color: "#C84337",
+                        fontFamily: "arial",
+                        fontSize: "12.2px",
+                        fontWeight: "inherit",
+                        margin: "4px 15px",
                       }}
                     >
                       {tipoMascotaError}
@@ -341,11 +352,11 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
                   {sexoError && (
                     <div
                       style={{
-                        color: '#C84337',
-                        fontFamily: 'arial',
-                        fontSize: '12.2px',
-                        fontWeight: 'inherit',
-                        margin: '4px 15px',
+                        color: "#C84337",
+                        fontFamily: "arial",
+                        fontSize: "12.2px",
+                        fontWeight: "inherit",
+                        margin: "4px 15px",
                       }}
                     >
                       {sexoError}
@@ -387,7 +398,7 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
                     accept="image/*"
                     id="icon-button-file"
                     type="file"
-                    style={{ display: 'none' }}
+                    style={{ display: "none" }}
                     onChange={handleFileChange}
                     onBlur={validateFoto}
                   />
@@ -397,7 +408,7 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
                       component="span"
                       startIcon={<PhotoCamera />}
                       fullWidth
-                      sx={{ backgroundColor: '#8D8D8D' }}
+                      sx={{ backgroundColor: "#8D8D8D" }}
                     >
                       Elegir Foto
                     </Button>
@@ -407,9 +418,9 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
                       src={URL.createObjectURL(formData.Foto)}
                       alt="Previsualización"
                       style={{
-                        width: '70px',
-                        height: 'auto',
-                        marginLeft: '5px',
+                        width: "70px",
+                        height: "auto",
+                        marginLeft: "5px",
                       }}
                     />
                   )}
@@ -417,26 +428,25 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
                 {fotoError && (
                   <div
                     style={{
-                      color: '#C84337',
-                      fontFamily: 'arial',
-                      fontSize: '12.2px',
-                      fontWeight: 'inherit',
-                      margin: '4px 15px',
+                      color: "#C84337",
+                      fontFamily: "arial",
+                      fontSize: "12.2px",
+                      fontWeight: "inherit",
+                      margin: "4px 15px",
                     }}
                   >
                     {fotoError}
                   </div>
                 )}
               </Grid>
-              <Grid item xs={6}>
                 <TextField
                   fullWidth
                   label="Id Cliente"
                   variant="outlined"
                   value={clienteId}
                   disabled
+                  style={{ display: "none" }}
                 />
-              </Grid>
             </Grid>
           </form>
         </DialogContent>
@@ -445,9 +455,9 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
             onClick={handleReset}
             sx={{
               marginTop: 4,
-              color: '#fff',
-              backgroundColor: '#8D8D8D',
-              '&:hover': { backgroundColor: '#747674' },
+              color: "#fff",
+              backgroundColor: "#8D8D8D",
+              "&:hover": { backgroundColor: "#747674" },
             }}
           >
             RESETEAR
@@ -458,8 +468,8 @@ const InsertarMascotaxCLI = ({ clienteId,onMascotasUpdated  }) => {
             variant="contained"
             sx={{
               marginTop: 4,
-              backgroundColor: '#29524A',
-              '&:hover': { backgroundColor: '#1D3B35' },
+              backgroundColor: "#29524A",
+              "&:hover": { backgroundColor: "#1D3B35" },
             }}
           >
             REGISTRAR
