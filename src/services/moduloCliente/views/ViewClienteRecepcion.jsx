@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Grid, Box, Typography } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from '@mui/icons-material/ContactEmergency';
 import Buscar from '../BuscarCliente';
 import Formulario from '../InsertarCliente';
 import Tabla from '../ListarClientes';

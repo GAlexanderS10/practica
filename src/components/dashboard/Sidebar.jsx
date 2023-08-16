@@ -90,7 +90,7 @@ const Sidebar = () => {
                   onClick={() => handleOptionClick("cliente")}
                   className={activeOption === "cliente" ? "active" : ""}
                 >
-                  <i className="bx bx-user icon"></i>
+                  <i className='bx bxs-id-card icon'></i>
                   <span className="text nav-text">Clientes</span>
                   </NavLink>
               </li>
@@ -106,8 +106,8 @@ const Sidebar = () => {
               </li>
               <li className="nav-link">
               <NavLink
-                  onClick={() => handleOptionClick("citas")}
-                  className={activeOption === "citas" ? "active" : ""}
+                  onClick={() => handleOptionClick("cita")}
+                  className={activeOption === "cita" ? "active" : ""}
                 >
                   <i className="bx bx-notepad icon"></i>
                   <span className="text nav-text">Citas</span>
@@ -133,11 +133,11 @@ const Sidebar = () => {
               </li>
               <li className="nav-link">
               <NavLink
-                  onClick={() => handleOptionClick("roles")}
-                  className={activeOption === "roles" ? "active" : ""}
+                  onClick={() => handleOptionClick("historias")}
+                  className={activeOption === "historias" ? "active" : ""}
                 >
-                  <i className='bx bx-street-view icon' ></i>
-                  <span className="text nav-text">Roles</span>
+                  <i className='bx bx-plus-medical icon'></i>
+                  <span className="text nav-text">Historias Clínicas</span>
                   </NavLink>
               </li>
               
