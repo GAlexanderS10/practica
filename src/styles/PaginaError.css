@@ -1,0 +1,16 @@
+.error-container {
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .image-container {
+    position: relative;
+  }
+  
+  #img-error {
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  

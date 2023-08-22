@@ -13,12 +13,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import EditarRol from './EditarRol';
-import EliminarRol from './EliminarRol';
+import EditarCargo from './EditarCargo';
+import EliminarCargo from './EliminarCargo';
 
 const columns = [
-  { id: 'rolId', label: 'ID', minWidth: 10 },
-  { id: 'tipo', label: 'ROL', minWidth: 140 },
+  { id: 'cargoId', label: 'ID', minWidth: 10 },
+  { id: 'cargo1', label: 'Cargo', minWidth: 140 },
+  { id: 'especialidad', label: 'Especialidad', minWidth: 140},
+  { id: 'sueldo', label: 'Sueldo', minWidth: 140},
   { id: 'actions', label: 'Acciones', minWidth: 160 },
 ];
 
@@ -29,23 +31,22 @@ const StyledTableCellHeader = styled(TableCell)(({ theme }) => ({
   fontWeight: 'bold'
 }));
 
-const ListarRoles = ({ roles,  onRolActualizado, onRolEliminado }) => {
+const ListarCargos = ({ cargos,  onCargoActualizado, onCargoEliminado }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
-  const [rolSeleccionado, setRolSeleccionado] = useState(null);
-  const [rolSeleccionadoEliminar, setRolSeleccionadoEliminar] = useState(null);
+  const [cargoSeleccionado, setCargoSeleccionado] = useState(null);
+  const [cargoSeleccionadoEliminar, setCargoSeleccionadoEliminar] = useState(null);
 
   useEffect(() => {
-    fetchRoles();
+    fetchCargos();
   }, []);
 
-  const fetchRoles = async () => {
+  const fetchCargos = async () => {
     try {
-      const response = await axios.get('https://localhost:7266/api/Rol');
-      // Aquí puedes actualizar la lista de clientes con los datos obtenidos desde la API
-      // setClientes(response.data);
+      const response = await axios.get('https://localhost:7266/api/Cargo');
+      // setCargos(response.data);
     } catch (error) {
-      console.error('Error al obtener la lista de Roles:', error);
+      console.error('Error al obtener la lista de Cargos:', error);
     }
   };
 
@@ -58,29 +59,29 @@ const ListarRoles = ({ roles,  onRolActualizado, onRolEliminado }) => {
     setPage(0);
   };
 
-  const handleOpenEditarRol = (rol) => {
-    setRolSeleccionado(rol);
+  const handleOpenEditarCargo = (cargo) => {
+    setCargoSeleccionado(cargo);
   };
 
-  const handleCloseEditarRol = () => {
-    setRolSeleccionado(null);
+  const handleCloseEditarCargo = () => {
+    setCargoSeleccionado(null);
   };
 
-  const handleRolActualizado = (rolId, datosActualizados) => {
-    onRolActualizado(rolId, datosActualizados);
+  const handleCargoActualizado = (cargoId, datosActualizados) => {
+    onCargoActualizado(cargoId, datosActualizados);
   };
 
-  const handleOpenEliminarRol = (rol) => {
-    setRolSeleccionadoEliminar(rol);
+  const handleOpenEliminarCargo = (cargo) => {
+    setCargoSeleccionadoEliminar(cargo);
   };
   
-  const handleCloseEliminarRol = () => {
-    setRolSeleccionadoEliminar(null);
+  const handleCloseEliminarCargo = () => {
+    setCargoSeleccionadoEliminar(null);
   };
   
 
-  const handleEliminarRol = (rolId) => {
-    onRolEliminado(rolId);
+  const handleEliminarCargo = (cargoId) => {
+    onCargoEliminado(cargoId);
   };
 
 
@@ -103,20 +104,22 @@ const ListarRoles = ({ roles,  onRolActualizado, onRolEliminado }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {roles
+            {cargos
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((rol) => (
-                <TableRow key={rol.rolId}>
-                  <TableCell align="center">{rol.rolId}</TableCell>
-                  <TableCell align="center">{rol.tipo}</TableCell>
+              .map((cargo) => (
+                <TableRow key={cargo.cargoId}>
+                  <TableCell align="center">{cargo.cargoId}</TableCell>
+                  <TableCell align="center">{cargo.cargo1}</TableCell>
+                  <TableCell align="center">{cargo.especialidad}</TableCell>
+                  <TableCell align="center">{cargo.sueldo}</TableCell>
                   <TableCell align="center">
                     <Box bgcolor="#A6D4FA" padding={1} borderRadius="50%" display="inline-block" margin="0 3px">
-                      <IconButton onClick={() => handleOpenEditarRol(rol)} >
+                      <IconButton onClick={() => handleOpenEditarCargo(cargo)} >
                         <EditIcon style={{ color: '#1565C0' }} />
                       </IconButton>
                     </Box>
                     <Box bgcolor="#FEB2B2" padding={1} borderRadius="50%" display="inline-block" margin="0 3px">
-                      <IconButton onClick={() => handleOpenEliminarRol(rol)} >
+                      <IconButton onClick={() => handleOpenEliminarCargo(cargo)} >
                         <DeleteIcon style={{ color: '#B91C1C' }} />
                       </IconButton>
                     </Box>
@@ -129,7 +132,7 @@ const ListarRoles = ({ roles,  onRolActualizado, onRolEliminado }) => {
       <TablePagination
         rowsPerPageOptions={[3, 6, 9]}
         component="div"
-        count={roles.length}
+        count={cargos.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
@@ -138,20 +141,20 @@ const ListarRoles = ({ roles,  onRolActualizado, onRolEliminado }) => {
     </Paper>
 
 
-    {rolSeleccionado && (
-        <EditarRol
-          rol={rolSeleccionado}
-          onCloseRol={handleCloseEditarRol}
-          onRolActualizado={handleRolActualizado}
+    {cargoSeleccionado && (
+        <EditarCargo
+          cargo={cargoSeleccionado}
+          onCloseCargo={handleCloseEditarCargo}
+          onCargoActualizado={handleCargoActualizado}
         />
       )}
 
-{rolSeleccionadoEliminar && (
-  <EliminarRol
-  rolId={rolSeleccionadoEliminar.rolId}
-  tipo={rolSeleccionadoEliminar.tipo}
-  onModalClose={handleCloseEliminarRol}
-  onRolEliminado={handleEliminarRol}
+{cargoSeleccionadoEliminar && (
+  <EliminarCargo
+  cargoId={cargoSeleccionadoEliminar.cargoId}
+  cargo1={cargoSeleccionadoEliminar.cargo1}
+  onModalClose={handleCloseEliminarCargo}
+  onCargoEliminado={handleEliminarCargo}
 />
 )}
 
@@ -159,4 +162,4 @@ const ListarRoles = ({ roles,  onRolActualizado, onRolEliminado }) => {
   );
 };
 
-export default ListarRoles;
+export default ListarCargos;

@@ -51,7 +51,7 @@ const ViewCitaRecepcion = () => {
         </Typography>
       </Box>
       <br />
-      <Box bgcolor="#F0F0F0" p={2}>
+      <Box bgcolor="#F0F0F0" p={2} display="flex" alignItems="center">
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12}>
             <Grid container spacing={3}>

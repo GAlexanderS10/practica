@@ -9,16 +9,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import WorkOffOutlined from '@mui/icons-material/WorkOffOutlined';
+import VerRolAsignado from './VerRolAsignado';
+
 
 const ModalAsignacionRol = ({usuarioId, userName,onCloseAsignarModal}) => {
+  
 
     
-
-
   return (
     <>
        
-       <Dialog  open={true} onClose={onCloseAsignarModal} maxWidth="lg" fullWidth>
+       <Dialog  open={true} onClose={onCloseAsignarModal} maxWidth="md" fullWidth>
       <DialogTitle>
         <IconButton
           aria-label="close"
@@ -56,7 +57,7 @@ const ModalAsignacionRol = ({usuarioId, userName,onCloseAsignarModal}) => {
         <Box bgcolor="#F0F0F0" p={2}>
           <Grid container spacing={3} justifyContent="center">
             <Grid item xs={12}>
-
+              <VerRolAsignado usuarioId={usuarioId} />
             </Grid>
           </Grid>
         </Box>

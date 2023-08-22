@@ -5,7 +5,7 @@ import Nosotros from "./pages/nosotros/Nosotros"
 import Servicio from "./pages/servicio/Servicio"
 import Contacto from "./pages/contacto/Contacto"
 import Ingresar from "./pages/formulario/Ingresar"
-import Menu from "./components/dashboard/Dashboard";
+import Menu from "./routes/Menu";
 import ProtectedRoute from "./routes/ProtectedRoute"
 import "./index.css";
 
@@ -29,6 +29,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         </Route>
       </Routes>
+      
     </div>
   </Router>
   );

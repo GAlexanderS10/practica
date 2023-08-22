@@ -19,10 +19,9 @@ const EliminarCita = ({ nroCita, mascotaNombre , onModalClose, onCitaEliminada }
 
   const handleDelete = async () => {
     try {
-      // Realizar la solicitud HTTP DELETE al backend para eliminar el servicio
+
       await axios.delete(`https://localhost:7266/api/Cita/eliminarCita/${nroCita}`);
       console.log('Cita eliminada exitosamente.');
-      // Llamar a la función para notificar al componente padre que el servicio ha sido eliminado
       onCitaEliminada(nroCita);
       onModalClose();
     } catch (error) {
