@@ -69,7 +69,7 @@ const EditarMascota = ({ mascota, onClose, onMascotaActualizada }) => {
 
     try {
       // Realizar la solicitud PUT a la API para actualizar la mascota
-      await axios.put(
+      const response = await axios.put(
         `https://localhost:7266/api/Mascota/${mascota.mascotaId}`,
         formData,
         {
@@ -79,11 +79,21 @@ const EditarMascota = ({ mascota, onClose, onMascotaActualizada }) => {
         }
       );
 
-      // Notificar que la mascota se ha actualizado
-      onMascotaActualizada();
-
-      // Cerrar el diálogo de edición
-      handleClose();
+      if (response.status === 204) {
+        console.log("Servicio actualizado exitosamente.");
+        onMascotaActualizada(mascota.mascotaId, {
+          nombre,
+          tipoMascota,
+          raza,
+          sexo,
+          color,
+          fechaNacimiento,
+          foto: mascota.foto,
+        });
+        onClose();
+      } else {
+        console.error("Error al actualizar el servicio.");
+      }
     } catch (error) {
       // Manejar cualquier error que ocurra durante la solicitud
       console.error("Error al actualizar la mascota:", error);

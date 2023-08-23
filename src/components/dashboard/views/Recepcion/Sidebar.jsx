@@ -106,16 +106,6 @@ const Sidebar = () => {
               </li>
               <li className="nav-link">
               <NavLink
-                  
-                  onClick={() => handleOptionClick("mascota")}
-                  className={activeOption === "mascota" ? "active" : ""}
-                >
-                  <i className="bx bxs-dog icon"></i>
-                  <span className="text nav-text">Mascotas</span>
-                  </NavLink>
-              </li>
-              <li className="nav-link">
-              <NavLink
                   onClick={() => handleOptionClick("cita")}
                   className={activeOption === "cita" ? "active" : ""}
                 >

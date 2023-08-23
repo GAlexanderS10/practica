@@ -35,6 +35,11 @@ const ViewRecepcionMascota = () => {
     }
   };
 
+  const handleMascotaEliminado = (mascotaId) => {
+    const nuevosMascotas = mascotas.filter((mascota) => mascota.mascotaId !== mascotaId);
+    setMascotas(nuevosMascotas);
+  };
+
   return (
     <>
       <Box bgcolor="#F0F0F0" p={2} display="flex" alignItems="center">
@@ -51,7 +56,7 @@ const ViewRecepcionMascota = () => {
           <Grid item xs={12}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
-                
+              <Buscar onSearchResults={setMascotas}/>
               </Grid>
               <Grid item xs={6}>
                 <Box display="flex" justifyContent="flex-end" align="right">
@@ -60,7 +65,7 @@ const ViewRecepcionMascota = () => {
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <Tabla mascotas={sortedMascotas} onMascotaActualizada={handleMascotaActualizada} />
+            <Tabla mascotas={sortedMascotas} onMascotaActualizada={handleMascotaActualizada} onMascotaEliminada={handleMascotaEliminado}/>
           </Grid>
         </Grid>
       </Box>

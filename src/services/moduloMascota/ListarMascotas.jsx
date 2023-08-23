@@ -11,11 +11,13 @@ import TablePagination from "@mui/material/TablePagination";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import PetsIcon from "@mui/icons-material/Pets";
-import CitaIcon from "@mui/icons-material/CalendarMonth";
+import PetsIcon from "@mui/icons-material/Person";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
-import EditarMascota from './EditarMascota'
+import EditarMascota from './EditarMascota';
+import EliminarMascota from "./EliminarMascota";
+import VerPropietario from "./VerPropietario";
+
 
 const columns = [
   { id: "mascotaId", label: "ID", minWidth: 8 },
@@ -45,6 +47,11 @@ const ListarMascotas = ({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);
   const [mascotaSeleccionada, setMascotaSeleccionada] = useState(null);
+  const [mascotaSeleccionadoEliminar, setMascotaSeleccionadoEliminar] = useState(null);
+  const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
+
+  
+  
 
   useEffect(() => {
     fetchMascotas();
@@ -82,6 +89,35 @@ const ListarMascotas = ({
   
     onMascotaActualizada(mascotaId, datosActualizados);
   };
+
+  const handleOpenEliminarMascota = (mascota) => {
+    setMascotaSeleccionadoEliminar(mascota);
+  };
+  
+  const handleCloseEliminarMascota = () => {
+    setMascotaSeleccionadoEliminar(null);
+  };
+  
+
+
+  const handleEliminarMascota = (mascotaId) => {
+    onMascotaEliminada(mascotaId);
+  };
+
+  const handleOpenVerPropietario = (clienteId) => {
+    // Buscar el cliente seleccionado por su ID
+    const cliente = mascotas.find((mascota) => mascota.clienteId === clienteId);
+    
+    // Establecer el cliente seleccionado en el estado
+    setClienteSeleccionado(cliente);
+  };
+
+  const handleCloseVerPropietario = () => {
+    // Aquí puedes realizar alguna lógica para cerrar el modal
+    setClienteSeleccionado(null); // Esto podría ser necesario para cerrar el modal
+  };
+  
+
 
   return (
     <>
@@ -135,28 +171,17 @@ const ListarMascotas = ({
                     </TableCell>
                     <TableCell align="center">{mascota.clienteId}</TableCell>
                     <TableCell align="center">
-                      <Box
-                        bgcolor="#F3F3F3"
-                        padding={1}
-                        borderRadius="50%"
-                        display="inline-block"
-                        margin="0 3px"
-                      >
-                        <IconButton>
-                          <PetsIcon style={{ color: "#555555" }} />
-                        </IconButton>
-                      </Box>
-                      <Box
-                        bgcolor="#BBF7BC"
-                        padding={1}
-                        borderRadius="50%"
-                        display="inline-block"
-                        margin="0 3px"
-                      >
-                        <IconButton>
-                          <CitaIcon style={{ color: "#048E11" }} />
-                        </IconButton>
-                      </Box>
+                        <Box
+                          bgcolor="#F3F3F3"
+                          padding={1}
+                          borderRadius="50%"
+                          display="inline-block"
+                          margin="0 3px"
+                        >
+                          <IconButton onClick={() => handleOpenVerPropietario(mascota.clienteId)}>
+                            <PetsIcon style={{ color: "#555555" }} />
+                          </IconButton>
+                        </Box>
                       <Box
                         bgcolor="#A6D4FA"
                         padding={1}
@@ -175,7 +200,7 @@ const ListarMascotas = ({
                         display="inline-block"
                         margin="0 3px"
                       >
-                        <IconButton>
+                        <IconButton onClick={() => handleOpenEliminarMascota(mascota)}>
                           <DeleteIcon style={{ color: "#B91C1C" }} />
                         </IconButton>
                       </Box>
@@ -203,6 +228,24 @@ const ListarMascotas = ({
           onMascotaActualizada={handleMascotaActualizada}
         />
       )}
+
+{mascotaSeleccionadoEliminar && (
+  <EliminarMascota
+  mascotaId={mascotaSeleccionadoEliminar.mascotaId}
+  mascotaNombre={mascotaSeleccionadoEliminar.nombre}
+  onModalClose={handleCloseEliminarMascota}
+  onMascotaEliminada={handleEliminarMascota}
+/>
+)}
+
+{clienteSeleccionado && (
+  <VerPropietario
+    clienteId={clienteSeleccionado.clienteId}
+    nombreMascota = {clienteSeleccionado.nombre}
+    onClose={handleCloseVerPropietario}
+  />
+)}
+
 
     </>
   );

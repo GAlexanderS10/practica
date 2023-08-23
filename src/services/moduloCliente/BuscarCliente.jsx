@@ -13,12 +13,12 @@ const BuscarCliente = ({ onSearchResults }) => {
 
     try {
       if (searchTerm.trim() === '') {
-        // Si el término de búsqueda está vacío, realizar una nueva solicitud para obtener todos los registros nuevamente
+
         const response = await axios.get('https://localhost:7266/api/Cliente');
         const clientesEncontrados = response.data;
         onSearchResults(clientesEncontrados);
       } else {
-        // Realizar la solicitud GET al endpoint de búsqueda con el término de búsqueda como parámetro de consulta
+
         const response = await axios.get(`https://localhost:7266/api/Cliente/buscar?searchTerm=${searchTerm}`);
         const clientesEncontrados = response.data;
         onSearchResults(clientesEncontrados);
