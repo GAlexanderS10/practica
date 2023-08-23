@@ -6,7 +6,7 @@ import ViewServicioAdmin from "../../services/moduloServicio/views/ViewServicioA
 import ViewCitaRecepcion from "../../services/moduloCita/views/ViewCitaRecepcion";
 import ViewEmpleadoAdmin from "../../services/moduloEmpleado/views/ViewEmpleadoAdmin";
 import ViewUserAdmin from "../../services/moduloUsuario/views/ViewUserAdmin";
-import ViewHistoriaVet from "../../services/moduloHistoriaClinica/views/ViewHistoriaVet"
+import ViewHistoriaVet from "../../services/moduloHistoriaClinica/views/ViewHistoriaAdmin"
 
 const Contenido = ({ activeOption }) => {
   const renderContent = () => {

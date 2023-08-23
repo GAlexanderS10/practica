@@ -57,8 +57,7 @@ const ListarUsuarios = ({
   const fetchUsuarios = async () => {
     try {
       const response = await axios.get("https://localhost:7266/api/Usuario");
-      // Aquí puedes actualizar la lista de clientes con los datos obtenidos desde la API
-      // setClientes(response.data);
+
     } catch (error) {
       console.error("Error al obtener la lista de Usuarios:", error);
     }

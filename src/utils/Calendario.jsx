@@ -67,7 +67,6 @@ function Calendario({ onDateSelect }) {
       );
     }
 
-    // Add empty days for the start of the month
     for (let i = 0; i < firstDayOfMonth; i++) {
       days.unshift(<div key={`empty-${i}`} className="empty-day"></div>);
     }

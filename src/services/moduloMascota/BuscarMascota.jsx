@@ -12,12 +12,12 @@ const BuscarMascotas = ({ onSearchResults }) => {
 
     try {
       if (searchTerm.trim() === '') {
-        // Si el término de búsqueda está vacío, realizar una nueva solicitud para obtener todas las mascotas nuevamente
+
         const response = await axios.get('https://localhost:7266/api/Mascota');
         const mascotasEncontradas = response.data;
         onSearchResults(mascotasEncontradas);
       } else {
-        // Realizar la solicitud GET al endpoint de búsqueda con el término de búsqueda como parámetro de consulta
+  
         const response = await axios.get(`https://localhost:7266/api/Mascota/buscar?searchTerm=${searchTerm}`);
         const mascotasEncontradas = response.data;
         onSearchResults(mascotasEncontradas);

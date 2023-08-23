@@ -55,7 +55,6 @@ const EditarCita = ({ cita, onClose, onCitaActualizada }) => {
 
     const updatedCita = {
       ...cita,
-      estado: estado,
       fechaCita: fechaCita,
       hora: hora,
       servicio: servicioSeleccionado,
@@ -112,10 +111,10 @@ const EditarCita = ({ cita, onClose, onCitaActualizada }) => {
             container
             spacing={2}
             sx={{
-              marginTop: "-10px",
+              marginTop: "10px",
             }}
           >
-            <Grid item xs={6}>
+            <Grid item xs={6} style={{ display: "none" }}>
               <TextField
                 label="NroCita"
                 value={cita.nroCita}
@@ -124,7 +123,7 @@ const EditarCita = ({ cita, onClose, onCitaActualizada }) => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={6} style={{ display: "none" }}>
               <TextField label="DNI" value={cita.dni} fullWidth disabled />
             </Grid>
             <Grid item xs={6}>
@@ -147,10 +146,7 @@ const EditarCita = ({ cita, onClose, onCitaActualizada }) => {
                 >
                   <MenuItem value="">Seleccione un tipo de servicio</MenuItem>
                   {servicios.map((servicio) => (
-                    <MenuItem
-                      key={servicio.servicioId}
-                      value={servicio.nombre}
-                    >
+                    <MenuItem key={servicio.servicioId} value={servicio.nombre}>
                       {servicio.nombre}
                     </MenuItem>
                   ))}
@@ -158,7 +154,7 @@ const EditarCita = ({ cita, onClose, onCitaActualizada }) => {
               </FormControl>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{ display: "none" }}>
               <FormControl fullWidth>
                 <InputLabel>Estado</InputLabel>
                 <Select value={estado} onChange={handleEstadoChange}>
@@ -169,9 +165,13 @@ const EditarCita = ({ cita, onClose, onCitaActualizada }) => {
               </FormControl>
             </Grid>
 
-            <Grid item xs={6}  sx={{
-              marginTop: "-10px",
-            }} >
+            <Grid
+              item
+              xs={6}
+              sx={{
+                marginTop: "-10px",
+              }}
+            >
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <Calendario
                   selectedDate={new Date(fechaCita)}
@@ -183,7 +183,7 @@ const EditarCita = ({ cita, onClose, onCitaActualizada }) => {
                   type="date"
                   name="FechaCita"
                   fullWidth
-                  style={{ marginTop: "11px"}}
+                  style={{ marginTop: "11px" }}
                   value={fechaCita}
                   onChange={(e) => setFechaCita(e.target.value)}
                   disabled
@@ -191,9 +191,13 @@ const EditarCita = ({ cita, onClose, onCitaActualizada }) => {
               </div>
             </Grid>
 
-            <Grid item xs={6} sx={{
-              marginTop: "-10px",
-            }} >
+            <Grid
+              item
+              xs={6}
+              sx={{
+                marginTop: "-10px",
+              }}
+            >
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <Horario
                   selectedTime={new Date(`2000-01-01T${hora}`)}

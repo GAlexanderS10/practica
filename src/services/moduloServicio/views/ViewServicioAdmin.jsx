@@ -25,16 +25,16 @@ const ViewServicioAdmin = () => {
   };
 
   const handleServicioRegistrado = (nuevoServicio) => {
-    // Agregar el nuevo servicio a la lista de servicios actual
+
     setServicios((prevServicios) => [...prevServicios, nuevoServicio]);
   };
 
   const handleServicioActualizado = (servicioId, datosActualizados) => {
-    // Buscamos el índice del servicio que se actualizó en la lista de servicios
+
     const servicioIndex = servicios.findIndex((servicio) => servicio.servicioId === servicioId);
   
     if (servicioIndex !== -1) {
-      // Creamos una nueva lista de servicios, donde el servicio actualizado reemplaza al antiguo
+
       const nuevosServicios = [...servicios];
       nuevosServicios[servicioIndex] = { ...nuevosServicios[servicioIndex], ...datosActualizados };
       setServicios(nuevosServicios);
@@ -42,7 +42,7 @@ const ViewServicioAdmin = () => {
   };
 
   const handleServicioEliminado = (servicioId) => {
-    // Filtrar la lista de servicios para eliminar el servicio con el servicioId proporcionado
+
     const nuevosServicios = servicios.filter((servicio) => servicio.servicioId !== servicioId);
     setServicios(nuevosServicios);
   };

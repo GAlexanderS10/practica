@@ -83,14 +83,13 @@ const InsertarCliente = ({ onClienteRegistrado }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validar campos antes de enviar el formulario
     validateNombre();
     validateApellido();
     validateDni();
     validateCelular();
     validateEmail();
 
-    // Comprobar si hay errores antes de enviar el formulario
+
     if (
       !nombreError &&
       !apellidoError &&
@@ -99,7 +98,7 @@ const InsertarCliente = ({ onClienteRegistrado }) => {
       !emailError
     ) {
       try {
-        // Datos del cliente a enviar a la API
+
         const clienteData = {
           Nombres: nombre,
           Apellidos: apellido,
@@ -108,19 +107,17 @@ const InsertarCliente = ({ onClienteRegistrado }) => {
           Email: email,
         };
 
-        // Reemplaza 'https://tu-api-rest.com/api/clientes' con la URL correcta de tu API REST para crear un nuevo cliente
+
         const response = await axios.post(
           "https://localhost:7266/api/Cliente",
           clienteData
         );
 
-        // Si la respuesta es exitosa, puedes hacer algo con la data de la respuesta
+
         console.log("Formulario enviado:", response.data);
 
-        // Llama a la función onClienteRegistrado con el nuevo cliente
         onClienteRegistrado(response.data);
 
-        // Cerrar el diálogo modal después de enviar el formulario
         handleCloseModal();
       } catch (error) {
         console.error("Error al enviar el formulario:", error);

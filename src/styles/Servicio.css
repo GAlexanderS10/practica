@@ -49,6 +49,11 @@ body.dark{
     color: var(--secondary-color);
 }
 
+.mod-fondo-tbl{
+    background: var(--body-color);
+    
+}
+
 .detalle-servicio {
     width: calc(33.33% - 40px); /* Cambiamos '100%' a 'calc(33.33% - 40px)' para que cada card ocupe 1/3 del espacio con un margen de 20px a cada lado */
     margin: 20px;

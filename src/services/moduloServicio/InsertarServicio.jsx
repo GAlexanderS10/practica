@@ -93,7 +93,7 @@ const InsertarServicio = ({ onServicioRegistrado }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validar campos antes de enviar el formulario
+
     validateNombre();
     validateDescripcion();
     validatePrecio();
@@ -235,10 +235,10 @@ const InsertarServicio = ({ onServicioRegistrado }) => {
                   fullWidth
                   label="Precio"
                   variant="outlined"
-                  type="text" // Cambiar el tipo a "text"
+                  type="text"
                   value={precio}
                   onChange={(e) => {
-                    // Utilizamos una expresión regular para permitir solo números y puntos en el valor
+                    
                     const value = e.target.value.replace(/[^0-9,]/g, "");
                     setPrecio(value);
                   }}

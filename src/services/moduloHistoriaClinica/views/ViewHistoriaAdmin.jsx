@@ -7,7 +7,7 @@ import Formulario from '../InsertarHistoria';
 import Tabla from '../ListarHistorias';
 import { sortBy } from 'lodash';
 
-const ViewHistoriaVet= () => {
+const ViewRecepcionCliente = () => {
 
 
   return (
@@ -44,4 +44,4 @@ const ViewHistoriaVet= () => {
   );
 };
 
-export default ViewHistoriaVet;
+export default ViewRecepcionCliente;

@@ -60,7 +60,7 @@ const EditarRolAsignado = ({ usuarioId, rolId, tipo, open, onClose }) => {
         `https://localhost:7266/api/UsuarioRol/ActualizarRol?usuarioId=${usuarioId}&rolId=${rolId}&nuevoRolId=${selectedRolId}`
       );
       console.log("Rol editado exitosamente");
-      setSelectedRolId(""); // Restablecer el estado del Select
+      setSelectedRolId(""); 
       onClose();
     } catch (error) {
       console.error("Error al editar el rol:", error);

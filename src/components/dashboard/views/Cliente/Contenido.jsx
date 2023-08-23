@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import ViewServicioCliente from "../../../../services/moduloServicio/views/ViewServicioCliente";
 import ViewClientePerfil from "../../../../services/moduloCliente/views/ViewClientePerfil";
 import ViewClienteMascota from "../../../../services/moduloMascota/views/ViewClienteMascota";
+import ViewCitaCliente from "../../../../services/moduloCita/views/ViewCitaCliente";
 
 const Contenido = ({ activeOption }) => {
   const renderContent = () => {
@@ -13,8 +14,8 @@ const Contenido = ({ activeOption }) => {
         return <ViewClientePerfil />;
       case "mascota":
         return <ViewClienteMascota />;
-
-
+        case "cita":
+          return <ViewCitaCliente />;
       default:
         return null;
     }

@@ -102,14 +102,14 @@ const InsertarEmpleado = ({ onEmpleadoRegistrado }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validar campos antes de enviar el formulario
+
     validateNombre();
     validateApellido();
     validateDni();
     validateCelular();
     validateEmail();
 
-    // Comprobar si hay errores antes de enviar el formulario
+
     if (
       !nombreError &&
       !apellidoError &&
@@ -118,7 +118,7 @@ const InsertarEmpleado = ({ onEmpleadoRegistrado }) => {
       !emailError
     ) {
       try {
-        // Datos del cliente a enviar a la API
+
         const empleadoData = {
           Nombres: nombre,
           Apellidos: apellido,

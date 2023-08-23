@@ -43,7 +43,7 @@ const EditarMascota = ({ mascota, onClose, onMascotaActualizada }) => {
     const selectedFile = e.target.files[0];
     setFoto(selectedFile);
 
-    // Mostrar una vista previa de la imagen seleccionada
+
     const reader = new FileReader();
     reader.onload = (event) => {
       setImagenPreview(event.target.result);
@@ -54,7 +54,7 @@ const EditarMascota = ({ mascota, onClose, onMascotaActualizada }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Crear un objeto FormData para enviar los datos de la mascota, incluida la imagen
+
     const formData = new FormData();
     formData.append("Nombre", nombre);
     formData.append("TipoMascota", tipoMascota);
@@ -68,7 +68,7 @@ const EditarMascota = ({ mascota, onClose, onMascotaActualizada }) => {
     }
 
     try {
-      // Realizar la solicitud PUT a la API para actualizar la mascota
+
       const response = await axios.put(
         `https://localhost:7266/api/Mascota/${mascota.mascotaId}`,
         formData,
@@ -95,12 +95,12 @@ const EditarMascota = ({ mascota, onClose, onMascotaActualizada }) => {
         console.error("Error al actualizar el servicio.");
       }
     } catch (error) {
-      // Manejar cualquier error que ocurra durante la solicitud
+
       console.error("Error al actualizar la mascota:", error);
     }
   };
 
-  // Establecer los valores iniciales de los campos con los datos de la mascota
+
   useEffect(() => {
     setNombre(mascota.nombre);
     setTipoMascota(mascota.tipoMascota);
@@ -111,7 +111,7 @@ const EditarMascota = ({ mascota, onClose, onMascotaActualizada }) => {
       new Date(mascota.fechaNacimiento).toISOString().split("T")[0]
     );
     setClienteId(mascota.clienteId);
-    // Si tienes la URL completa de la imagen, puedes usarla directamente
+
     setImagenPreview(`https://localhost:7266/Uploads/${mascota.foto}`);
   }, [mascota]);
 

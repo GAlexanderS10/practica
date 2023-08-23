@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
-const EliminarServicio = ({ servicioId, servicioNombre , onModalClose, onServicioEliminado }) => {
+const EliminarCita = ({ nroCita, mascotaNombre , onModalClose, onCitaEliminada }) => {
 
   const handleCloseModal = () => {
     onModalClose();
@@ -20,13 +20,12 @@ const EliminarServicio = ({ servicioId, servicioNombre , onModalClose, onServici
   const handleDelete = async () => {
     try {
 
-      await axios.delete(`https://localhost:7266/api/Servicio/${servicioId}`);
-      console.log('Servicio eliminado exitosamente.');
-
-      onServicioEliminado(servicioId);
+      await axios.delete(`https://localhost:7266/api/Cita/eliminarCita/${nroCita}`);
+      console.log('Cita eliminada exitosamente.');
+      onCitaEliminada(nroCita);
       onModalClose();
     } catch (error) {
-      console.error('Error al eliminar el servicio:', error);
+      console.error('Error al eliminar la cita:', error);
     }
   };
 
@@ -68,7 +67,7 @@ const EliminarServicio = ({ servicioId, servicioNombre , onModalClose, onServici
         <br />
         <DialogContent>
           <DialogContentText sx={{ fontWeight: 'bold', color: '#222' }}>
-            ¿Está seguro de eliminar el servicio "{servicioNombre}"?
+            ¿Está seguro de eliminar la cita de la mascota "{mascotaNombre}"?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -90,4 +89,4 @@ const EliminarServicio = ({ servicioId, servicioNombre , onModalClose, onServici
   );
 };
 
-export default EliminarServicio;
+export default EliminarCita;

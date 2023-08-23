@@ -25,24 +25,23 @@ const ViewRecepcionCliente = () => {
   };
 
   const handleClienteRegistrado = (nuevoCliente) => {
-    // Agregar el nuevo cliente a la lista de clientes actual
+
     setClientes((prevClientes) => [...prevClientes, nuevoCliente]);
   };
 
-  // Función para actualizar un cliente existente en la lista
+ 
   const handleClienteActualizado = (clienteId, datosActualizados) => {
-    // Buscamos el índice del cliente que se actualizó en la lista de clientes
+ 
     const clienteIndex = clientes.findIndex((cliente) => cliente.clienteId === clienteId);
 
     if (clienteIndex !== -1) {
-      // Creamos una nueva lista de clientes, donde el cliente actualizado reemplaza al antiguo
+
       const nuevosClientes = [...clientes];
       nuevosClientes[clienteIndex] = { ...nuevosClientes[clienteIndex], ...datosActualizados };
       setClientes(nuevosClientes);
     }
   };
 
-  // Función para eliminar un cliente de la lista
   const handleClienteEliminado = (clienteId) => {
     setClientes((prevClientes) =>
       prevClientes.filter((cliente) => cliente.clienteId !== clienteId)

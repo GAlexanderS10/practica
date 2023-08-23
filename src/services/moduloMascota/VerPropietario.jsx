@@ -1,5 +1,3 @@
-// VerPropietario.jsx
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Dialog from "@mui/material/Dialog";
@@ -18,7 +16,7 @@ const VerPropietario = ({ clienteId, onClose , nombreMascota}) => {
   const [propietarioData, setPropietarioData] = useState(null);
 
   useEffect(() => {
-    // Realiza una solicitud HTTP para obtener los datos del propietario
+
     axios
       .get(`https://localhost:7266/api/Cliente/${clienteId}`)
       .then((response) => {

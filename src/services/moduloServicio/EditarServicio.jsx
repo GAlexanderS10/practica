@@ -22,7 +22,7 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
   const [imagenPreview, setImagenPreview] = useState("");
 
   useEffect(() => {
-    // Cuando se monte el componente, establecer los valores actuales del servicio en los campos del formulario
+
     setNombre(servicio.nombre);
     setDescripcion(servicio.descripcion);
     setPrecio(servicio.precio);
@@ -30,7 +30,7 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
   }, [servicio]);
 
   const handleClose = () => {
-    // Cerrar el modal sin guardar cambios
+
     onClose();
   };
 
@@ -149,7 +149,7 @@ const EditarServicio = ({ servicio, onClose, onServicioActualizado }) => {
                   type="text"
                   value={precio}
                   onChange={(e) => {
-                    // Utilizamos una expresión regular para permitir solo números y puntos en el valor
+
                     const value = e.target.value.replace(/[^0-9,]/g, "");
                     setPrecio(value);
                   }}

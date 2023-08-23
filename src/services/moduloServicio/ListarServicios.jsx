@@ -73,7 +73,7 @@ const ListarServicios = ({servicios,onServicioActualizado,onServicioEliminado })
   };
 
   const handleServicioActualizado = (servicioId, datosActualizados) => {
-    // Actualizar la lista de servicios con los datos actualizados
+
     onServicioActualizado(servicioId, datosActualizados);
   };
 
@@ -88,8 +88,7 @@ const ListarServicios = ({servicios,onServicioActualizado,onServicioEliminado })
 
 
   const handleEliminarServicio = (servicioId) => {
-    // Aquí puedes realizar cualquier otra lógica relacionada con la eliminación del servicio
-    // Luego, llamar a la función onServicioEliminado para eliminar el servicio de la lista
+
     onServicioEliminado(servicioId);
   };
 

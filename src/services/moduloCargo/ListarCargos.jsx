@@ -111,7 +111,7 @@ const ListarCargos = ({ cargos,  onCargoActualizado, onCargoEliminado }) => {
                   <TableCell align="center">{cargo.cargoId}</TableCell>
                   <TableCell align="center">{cargo.cargo1}</TableCell>
                   <TableCell align="center">{cargo.especialidad}</TableCell>
-                  <TableCell align="center">{cargo.sueldo}</TableCell>
+                  <TableCell align="center">S/.{cargo.sueldo}.00</TableCell>
                   <TableCell align="center">
                     <Box bgcolor="#A6D4FA" padding={1} borderRadius="50%" display="inline-block" margin="0 3px">
                       <IconButton onClick={() => handleOpenEditarCargo(cargo)} >

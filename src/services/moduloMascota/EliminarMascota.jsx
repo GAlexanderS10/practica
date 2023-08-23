@@ -19,10 +19,11 @@ const EliminarMascota = ({ mascotaId, mascotaNombre , onModalClose, onMascotaEli
 
   const handleDelete = async () => {
     try {
-      // Realizar la solicitud HTTP DELETE al backend para eliminar el servicio
+
       await axios.delete(`https://localhost:7266/api/Mascota/${mascotaId}`);
+      
       console.log('Mascota eliminado exitosamente.');
-      // Llamar a la función para notificar al componente padre que el servicio ha sido eliminado
+
       onMascotaEliminada(mascotaId);
       onModalClose();
     } catch (error) {

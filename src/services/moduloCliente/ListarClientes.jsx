@@ -54,7 +54,7 @@ const ListarClientes = ({ clientes, onClienteActualizado, onClienteEliminado }) 
   const fetchClientes = async () => {
     try {
       const response = await axios.get('https://localhost:7266/api/Cliente');
-      // Aquí puedes actualizar la lista de clientes con los datos obtenidos desde la API
+
       // setClientes(response.data);
     } catch (error) {
       console.error('Error al obtener la lista de clientes:', error);

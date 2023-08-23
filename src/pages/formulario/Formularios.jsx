@@ -304,6 +304,8 @@ const Formularios = () => {
 
               <input type="submit" value="Ingresar" className="btn solid" />
             </form>
+            
+            {/* Formulario de Registro de Usuario */}
 
             <form
               action="#"
@@ -324,7 +326,7 @@ const Formularios = () => {
                     value={formData.nombres}
                     onChange={(e) => {
                       setFormData({ ...formData, nombres: e.target.value });
-                      // Validación de nombres
+
                       if (!namePattern.test(e.target.value)) {
                         setErrors({ ...formErrors, nombres: true });
                       } else {
@@ -357,7 +359,7 @@ const Formularios = () => {
                     value={formData.apellidos}
                     onChange={(e) => {
                       setFormData({ ...formData, apellidos: e.target.value });
-                      // Validación de apellidos
+
                       if (!namePattern.test(e.target.value)) {
                         setErrors({ ...formErrors, apellidos: true });
                       } else {
@@ -388,7 +390,7 @@ const Formularios = () => {
                     value={formData.dni}
                     onChange={(e) => {
                       setFormData({ ...formData, dni: e.target.value });
-                      // Validación de DNI
+
                       if (!/^\d{8}$/.test(e.target.value)) {
                         setErrors({ ...formErrors, dni: true });
                       } else {
@@ -419,7 +421,7 @@ const Formularios = () => {
                     value={formData.celular}
                     onChange={(e) => {
                       setFormData({ ...formData, celular: e.target.value });
-                      // Validación de celular
+
                       if (!/^\d{9}$/.test(e.target.value)) {
                         setErrors({ ...formErrors, celular: true });
                       } else {
@@ -449,7 +451,7 @@ const Formularios = () => {
                   value={formData.email}
                   onChange={(e) => {
                     setFormData({ ...formData, email: e.target.value });
-                    // Validación de email
+
                     if (!emailPattern.test(e.target.value)) {
                       setErrors({ ...formErrors, email: true });
                     } else {
@@ -484,7 +486,7 @@ const Formularios = () => {
                     value={formData.userName}
                     onChange={(e) => {
                       setFormData({ ...formData, userName: e.target.value });
-                      // Validación de userName
+
                       if (
                         e.target.value.length < 8 ||
                         e.target.value.length > 60 ||
@@ -521,7 +523,7 @@ const Formularios = () => {
                     value={formData.password}
                     onChange={(e) => {
                       setFormData({ ...formData, password: e.target.value });
-                      // Validación de password
+
                       if (!passwordPattern.test(e.target.value)) {
                         setErrors({ ...formErrors, password: true });
                       } else {

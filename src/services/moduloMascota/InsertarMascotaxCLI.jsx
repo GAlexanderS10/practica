@@ -48,7 +48,7 @@ const InsertarMascotaxCLI = ({ onMascotasUpdated }) => {
   const [fotoError, setFotoError] = useState("");
 
   useEffect(() => {
-    // Obtenemos el clientId desde el localStorage al cargar el componente
+  
     const clientIdFromLocalStorage = localStorage.getItem('clienteId');
     if (clientIdFromLocalStorage) {
       setFormData((prevFormData) => ({
@@ -77,7 +77,7 @@ const InsertarMascotaxCLI = ({ onMascotasUpdated }) => {
     setFormData({ ...formData, Foto: file });
   };
 
-  const isAlpha = (text) => /^[A-Za-z\sáéíóúÁÉÍÓÚñÑ]+$/.test(text); // Allow spaces in names
+  const isAlpha = (text) => /^[A-Za-z\sáéíóúÁÉÍÓÚñÑ]+$/.test(text); 
 
   const validateNombre = () => {
     if (!formData.Nombre.trim()) {
@@ -178,8 +178,6 @@ const InsertarMascotaxCLI = ({ onMascotasUpdated }) => {
 
         if (response.status === 201) {
           setSuccessMessage("Mascota agregada correctamente.");
-
-          // Call the onMascotasUpdated function to trigger list update
 
           closeModal();
           setTimeout(() => {

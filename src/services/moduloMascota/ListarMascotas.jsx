@@ -105,16 +105,16 @@ const ListarMascotas = ({
   };
 
   const handleOpenVerPropietario = (clienteId) => {
-    // Buscar el cliente seleccionado por su ID
+
     const cliente = mascotas.find((mascota) => mascota.clienteId === clienteId);
     
-    // Establecer el cliente seleccionado en el estado
+
     setClienteSeleccionado(cliente);
   };
 
   const handleCloseVerPropietario = () => {
-    // Aquí puedes realizar alguna lógica para cerrar el modal
-    setClienteSeleccionado(null); // Esto podría ser necesario para cerrar el modal
+
+    setClienteSeleccionado(null); 
   };
   
 

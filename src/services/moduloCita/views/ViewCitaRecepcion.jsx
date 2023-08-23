@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Grid, Box, Typography } from '@mui/material';
 import PersonIcon from '@mui/icons-material/NoteAlt';
 import Buscar from '../BuscarCita';
-import Formulario from '../InsertarCita';
 import Tabla from '../ListarCitas';
 
 const ViewCitaRecepcion = () => {
@@ -63,8 +62,6 @@ const ViewCitaRecepcion = () => {
               <Grid item xs={6}>
                 <Box display="flex" justifyContent="flex-end" align="right">
 
-
-                  
                 </Box>
               </Grid>
             </Grid>

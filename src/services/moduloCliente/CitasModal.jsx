@@ -99,7 +99,7 @@ const CitasModal = ({
       onCloseCita();
     } catch (error) {
       console.error("Error al crear cita:", error);
-      // Manejo de errores, como mostrar un mensaje de error al usuario
+
     }
   };
 

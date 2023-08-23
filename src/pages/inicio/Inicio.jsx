@@ -7,7 +7,6 @@ function Inicio() {
         <>
             <Fragment>
                 <Navbar/>
-                
             </Fragment>
         </>
     )

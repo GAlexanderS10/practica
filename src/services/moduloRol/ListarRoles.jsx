@@ -42,7 +42,7 @@ const ListarRoles = ({ roles,  onRolActualizado, onRolEliminado }) => {
   const fetchRoles = async () => {
     try {
       const response = await axios.get('https://localhost:7266/api/Rol');
-      // Aquí puedes actualizar la lista de clientes con los datos obtenidos desde la API
+
       // setClientes(response.data);
     } catch (error) {
       console.error('Error al obtener la lista de Roles:', error);
