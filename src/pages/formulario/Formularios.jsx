@@ -88,6 +88,10 @@ const Formularios = () => {
       localStorage.setItem("dni", dni);
       localStorage.setItem("role", roles);
 
+        console.log(token)
+        setTimeout(() => {
+          console.clear();
+        }, 30000);
       navigate("/menu");
 
       Swal.fire({

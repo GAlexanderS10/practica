@@ -15,7 +15,7 @@ const Menu = () => {
   useEffect(() => {
     const sessionTimeout = setTimeout(() => {
       handleLogout(); 
-    }, 60000); 
+    }, 43200000 ); 
 
 
     return () => {
@@ -28,7 +28,7 @@ const Menu = () => {
     clearTimeout(activeTimer); 
     const newSessionTimeout = setTimeout(() => {
       handleLogout();
-    }, 60000); 
+    }, 43200000 ); 
     setActiveTimer(newSessionTimeout); 
   };
 

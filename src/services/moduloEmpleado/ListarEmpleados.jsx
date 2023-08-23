@@ -15,15 +15,15 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
 const columns = [
-  { id: 'empleadoId', label: 'ID', minWidth: 10 },
+  { id: 'empleadoId', label: 'ID', minWidth: 8 },
   { id: 'nombres', label: 'Nombres', minWidth: 180 },
   { id: 'apellidos', label: 'Apellidos', minWidth: 180 },
   { id: 'dni', label: 'DNI', minWidth: 100 },
   { id: 'celular', label: 'Celular', minWidth: 100 },
   { id: 'email', label: 'Email', minWidth: 220 },
-  { id: 'cargo1', label: 'Cargo', minWidth: 100 }, // Añadido el campo Cargo
-  { id: 'especialidad', label: 'Especialidad', minWidth: 100 }, // Añadido el campo Especialidad
-  { id: 'sueldo', label: 'Sueldo', minWidth: 100 }, // Añadido el campo Sueldo
+  { id: 'cargo1', label: 'Cargo', minWidth: 100 }, 
+  { id: 'especialidad', label: 'Especialidad', minWidth: 100 }, 
+  { id: 'sueldo', label: 'Sueldo', minWidth: 120 }, 
   { id: 'actions', label: 'Acciones', minWidth: 180 },
 ];
 

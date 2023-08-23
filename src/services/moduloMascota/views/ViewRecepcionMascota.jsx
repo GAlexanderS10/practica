@@ -5,9 +5,11 @@ import PetsIcon from '@mui/icons-material/Pets';
 import Buscar from '../BuscarMascota';
 import Formulario from '../InsertarMascota';
 import Tabla from '../ListarMascotas';
+import { sortBy } from 'lodash';
 
 const ViewRecepcionMascota = () => {
   const [mascotas, setMascotas] = useState([]);
+  const sortedMascotas = sortBy(mascotas, 'mascotaId').reverse();
 
   useEffect(() => {
     fetchMascotas();
@@ -22,27 +24,15 @@ const ViewRecepcionMascota = () => {
     }
   };
 
-  const handleMascotaRegistrada = (nuevaMascota) => {
-    // Agregar la nueva mascota a la lista de mascotas actual
-    setMascotas((prevMascotas) => [...prevMascotas, nuevaMascota]);
-  };
-
   const handleMascotaActualizada = (mascotaId, datosActualizados) => {
-    // Buscamos el índice de la mascota que se actualizó en la lista de mascotas
+    
     const mascotaIndex = mascotas.findIndex((mascota) => mascota.mascotaId === mascotaId);
-
+  
     if (mascotaIndex !== -1) {
-      // Creamos una nueva lista de mascotas, donde la mascota actualizada reemplaza a la antigua
-      const nuevasMascotas = [...mascotas];
-      nuevasMascotas[mascotaIndex] = { ...nuevasMascotas[mascotaIndex], ...datosActualizados };
-      setMascotas(nuevasMascotas);
+      const nuevosMascotas = [...mascotas];
+      nuevosMascotas[mascotaIndex] = { ...nuevosMascotas[mascotaIndex], ...datosActualizados };
+      setMascotas(nuevosMascotas);
     }
-  };
-
-  const handleMascotaEliminada = (mascotaId) => {
-    setMascotas((prevMascotas) =>
-      prevMascotas.filter((mascota) => mascota.mascotaId !== mascotaId)
-    );
   };
 
   return (
@@ -61,21 +51,16 @@ const ViewRecepcionMascota = () => {
           <Grid item xs={12}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
-                <Buscar onSearchResults={setMascotas} />
+                
               </Grid>
               <Grid item xs={6}>
                 <Box display="flex" justifyContent="flex-end" align="right">
-                  <Formulario onMascotaRegistrada={handleMascotaRegistrada} />
                 </Box>
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <Tabla
-              mascotas={mascotas}
-              onMascotaActualizada={handleMascotaActualizada}
-              onMascotaEliminada={handleMascotaEliminada}
-            />
+            <Tabla mascotas={sortedMascotas} onMascotaActualizada={handleMascotaActualizada} />
           </Grid>
         </Grid>
       </Box>
